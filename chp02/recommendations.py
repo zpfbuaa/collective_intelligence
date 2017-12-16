@@ -166,7 +166,9 @@ def getSimarity(critics,person,top_n=5,similarity = sim_person):
         sim = similarity(critics,person,other)
         other_dic.setdefault(other,0)
         other_dic[other] = sim
-    result = sorted(other_dic.iteritems(), key=lambda asd:asd[1], reverse=True) #True from large to small, False: from small to large
+
+    result = sorted(other_dic.iteritems(), key=lambda asd: asd[1],reverse=True)  # True from large to small, False: from small to large
+
     return result[0:top_n]
 #
 # test = (getSimarity(critics,'Lisa Rose'))
@@ -309,7 +311,7 @@ print prefs['15']
 def running_movies_demo(run_flag=0):
     if(run_flag==1):
         time1 = time.time()
-        recommend1 =  getRecommendation(prefs,'15',accelerator_flag=0)[0:50] # this cost time much than others
+        recommend1 =  getRecommendation(prefs,'15',accelerator_flag=1)[0:50] # this cost time much than others
         print 'recommend1 are:',recommend1
         time2 = time.time()
         print 'getRecommendation cost time:',time2-time1
