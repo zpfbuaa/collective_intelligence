@@ -7,7 +7,8 @@
 
 import matplotlib.pyplot as plt
 import math
-
+import csv
+import time
 # A dictionary of movie critics and their ratings of a small
 # set of movies
 critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
@@ -30,44 +31,45 @@ critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
 
 print type(critics)
 
-x_durpre = []
-y_snakes = []
-key_list = []
+def print_demp():
+    x_durpre = []
+    y_snakes = []
+    key_list = []
 
-for key in critics.keys():
-    if(critics[key].has_key('Snakes on a Plane') and critics[key].has_key('You, Me and Dupree')):
-        key_list.append(key)
-        x_durpre.append(critics[key]['You, Me and Dupree'])
-        y_snakes.append(critics[key]['Snakes on a Plane'])
+    for key in critics.keys():
+        if(critics[key].has_key('Snakes on a Plane') and critics[key].has_key('You, Me and Dupree')):
+            key_list.append(key)
+            x_durpre.append(critics[key]['You, Me and Dupree'])
+            y_snakes.append(critics[key]['Snakes on a Plane'])
 
-print x_durpre,y_snakes
-n = len(x_durpre)
+    print x_durpre,y_snakes
 
-fig = plt.figure(111)
-plt.xlim(xmax=5,xmin=0)
-plt.ylim(ymax=5,ymin=0)
-plt.plot(x_durpre,y_snakes,'ro')
+    n = len(x_durpre)
+    fig = plt.figure(111)
+    plt.xlim(xmax=5,xmin=0)
+    plt.ylim(ymax=5,ymin=0)
+    plt.plot(x_durpre,y_snakes,'ro')
 
-for i in range(n):
-    plt.annotate(key_list[i]+'\n',xy=[x_durpre[i],y_snakes[i]])
-plt.title('Snakes and Dupree')
-fig.savefig('pics/Snakes and Dupree result.jpg')
-plt.show()
+    for i in range(n):
+        plt.annotate(key_list[i]+'\n',xy=[x_durpre[i],y_snakes[i]])
+    plt.title('Snakes and Dupree')
+    fig.savefig('pics/Snakes and Dupree result.jpg')
+    plt.show()
 
-matrix_distance = [[]] * n
+    matrix_distance = [[]] * n
 
-for i in range(n):
-    dis_vect = []
-    for j in range(n):
-        if(i == j):
-            dist = 0
-        else:
-            dist = math.sqrt(math.pow(x_durpre[i]-x_durpre[j],2) + math.pow(y_snakes[i] - y_snakes[j],2))
-        dis_vect.append(dist)
-    matrix_distance[i] = dis_vect
+    for i in range(n):
+        dis_vect = []
+        for j in range(n):
+            if(i == j):
+                dist = 0
+            else:
+                dist = math.sqrt(math.pow(x_durpre[i]-x_durpre[j],2) + math.pow(y_snakes[i] - y_snakes[j],2))
+            dis_vect.append(dist)
+        matrix_distance[i] = dis_vect
 
-for i in range(n):
-    print matrix_distance[i]
+    for i in range(n):
+        print matrix_distance[i]
 
 def sim_dist(critics, person1, person2):
     share_list = {}
@@ -106,7 +108,7 @@ def sim_person(critics,person1,person2): # calculate the similarity between pers
         return 0
     return num/den
 
-def plot_person_like(critics,person1,person2,show_flag = 0): # plot the like item between person1 and person2
+def plot_person_like(critics,person1,person2,show_flag = 0, save_flag = 0): # plot the like item between person1 and person2
     plt.clf()
     x = []
     y = []
@@ -135,7 +137,8 @@ def plot_person_like(critics,person1,person2,show_flag = 0): # plot the like ite
               ' similarity is: ' + sim)  # add similarity to title
     plt.xlabel(person1)
     plt.ylabel(person2)
-    plt.savefig('pics/'+person1+' and '+person2+' result.jpg')
+    if (save_flag==1):
+        plt.savefig('pics/'+person1+' and '+person2+' result.jpg')
     if(show_flag==1):
         plt.show()
 
@@ -194,4 +197,103 @@ print 'Superman Returns top matches',topMatch(movies,'Superman Returns',5,simila
 print 'Just My Luck getRecommendation are',getRecommendation(movies,'Just My Luck',similarity=sim_person)
 
 
-plot_person_like(movies,'Just My Luck','Superman Returns',1)
+plot_person_like(movies,'Just My Luck','Superman Returns',show_flag=0,save_flag=1)
+
+def calculateSimiliarItems(critics, n=10):
+
+    result = {}
+    convert_critics = convertItem(critics)
+    for item in convert_critics:
+        scores = topMatch(convert_critics, item, n=n, similarity=sim_dist)
+        result[item] = scores
+    return result
+
+print calculateSimiliarItems(critics,10)
+
+def getRecommendationItems(critics,item_match, person):
+    userRatings = critics[person]
+    scores = {}
+    totalSim = {}
+    for (item, rating) in userRatings.items():
+        for (similarity, item2) in item_match[item]:
+            if item2 in userRatings:
+                continue
+            scores.setdefault(item2, 0)
+            scores[item2] += similarity * rating
+            totalSim.setdefault(item2, 0)
+            totalSim[item2] += similarity
+
+    rankings = [(score / totalSim[item], item) for item, score in scores.items()]
+    rankings.sort()
+    rankings.reverse()
+    return rankings
+
+for person in x_person:
+
+    item_match = calculateSimiliarItems(critics,10)
+
+    result = getRecommendationItems(critics,item_match,person)
+    if len(result) == 0:
+        print person+' don\'t have recommendation.'
+    else:
+        print person+' recommendations are:',result
+
+
+
+def load_data(root_path,movies_path = 'movies.csv',rating_path='ratings.csv'):
+    movies = {}
+    prefs = {}
+    with open(root_path+movies_path) as csvfile:
+        movies_data = csv.reader(csvfile,delimiter=',')
+        header = True
+        number = 0 # just to get the top 3000 lines
+        for item_movie in movies_data: # (id,title,genres)
+            if number>3000: # the running_result_pic: this value is 10000
+                break
+            id = item_movie[0]
+            title = item_movie[1]
+            # genres = item_movie[3] # this genres now is useless 2017.12.16 20:06:59
+            if header == True:
+                header = False
+                continue
+            movies[id] = title
+            number+=1
+
+    with open(root_path+rating_path) as csvfile:
+        prefs_data = csv.reader(csvfile,delimiter=',')
+        header = True
+        number = 0
+        for item_pref in prefs_data: #(userId,movieId,rating,timestamp)
+            if number > 3000: # the running_result_pic: this value is the total line in ratings.csv 100005
+                break
+            userId = item_pref[0]
+            movieId = item_pref[1]
+            rating = item_pref[2]
+            # timestamp = item_pref[3] # this timestamp is useless
+            prefs.setdefault(userId, {}) # create a dic
+            if(movieId in movies.keys()):
+                prefs[userId][movies[movieId]] = float(rating) # key is userId, (key is movies_title, value is rating)
+                number+=1
+    return movies, prefs
+
+moviese, prefs = load_data(root_path='data/ml-latest-small/') # loading data may cost some time
+print prefs['15']
+
+time1 = time.time()
+recommend1 =  getRecommendation(prefs,'15')[0:50] # this cost time much than others
+print 'recommend1 are:',recommend1
+time2 = time.time()
+print 'getRecommendation cost time:',time2-time1
+
+time3 = time.time()
+itemsim = calculateSimiliarItems(prefs,n=10) # just to get the top 10 # the running_result_pic: this value is 20
+time4 = time.time()
+print 'calculateSimiliarItems cost time:',time4-time3
+
+time5 = time.time()
+recommend2 = getRecommendationItems(prefs,itemsim,'15')[0:50] # this cost longer time to build a total item-based filter
+
+print 'recommend2 are:',recommend2
+time6 = time.time()
+print 'getRecommendationItems cost time:',time6-time5
+print 'total cost time:',time.time()-time1
