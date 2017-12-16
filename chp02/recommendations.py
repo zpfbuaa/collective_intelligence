@@ -279,21 +279,45 @@ def load_data(root_path,movies_path = 'movies.csv',rating_path='ratings.csv'):
 moviese, prefs = load_data(root_path='data/ml-latest-small/') # loading data may cost some time
 print prefs['15']
 
-time1 = time.time()
-recommend1 =  getRecommendation(prefs,'15')[0:50] # this cost time much than others
-print 'recommend1 are:',recommend1
-time2 = time.time()
-print 'getRecommendation cost time:',time2-time1
+def running_movies_demo(run_flag=0):
+    if(run_flag==1):
+        time1 = time.time()
+        recommend1 =  getRecommendation(prefs,'15')[0:50] # this cost time much than others
+        print 'recommend1 are:',recommend1
+        time2 = time.time()
+        print 'getRecommendation cost time:',time2-time1
 
-time3 = time.time()
-itemsim = calculateSimiliarItems(prefs,n=10) # just to get the top 10 # the running_result_pic: this value is 20
-time4 = time.time()
-print 'calculateSimiliarItems cost time:',time4-time3
+        time3 = time.time()
+        itemsim = calculateSimiliarItems(prefs,n=10) # just to get the top 10 # the running_result_pic: this value is 20
+        time4 = time.time()
+        print 'calculateSimiliarItems cost time:',time4-time3
 
-time5 = time.time()
-recommend2 = getRecommendationItems(prefs,itemsim,'15')[0:50] # this cost longer time to build a total item-based filter
+        time5 = time.time()
+        recommend2 = getRecommendationItems(prefs,itemsim,'15')[0:50] # this cost longer time to build a total item-based filter
 
-print 'recommend2 are:',recommend2
-time6 = time.time()
-print 'getRecommendationItems cost time:',time6-time5
-print 'total cost time:',time.time()-time1
+        print 'recommend2 are:',recommend2
+        time6 = time.time()
+        print 'getRecommendationItems cost time:',time6-time5
+        print 'total cost time:',time.time()-time1
+
+
+def sim_tanimoto(critics, person1, person2): # exercies_1
+    set_a = critics[person1]
+    set_b = critics[person2]
+    share_dic = {}
+    for item in set_a:
+        if (item in set_b):
+            share_dic[item] = 1
+
+    c = float(len(share_dic))
+    if 0 == c:
+        return 0
+    a = len(set_a)
+    b = len(set_b)
+    return float(c/(a+b+c))
+
+result = []
+[result.append(sim_tanimoto(critics,x_person[i],x_person[j]))for i in range(len(x_person)) for j in range(i+1,len(x_person))]
+print 'sim_tanimoto on critics',result
+print 'sim_tanimoto on movies',sim_tanimoto(prefs,'10','15')
+
