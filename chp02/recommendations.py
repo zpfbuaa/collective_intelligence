@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import math
 import csv
 import time
+import pylast
 # A dictionary of movie critics and their ratings of a small
 # set of movies
 critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
@@ -329,9 +330,10 @@ def running_movies_demo(run_flag=0):
         print 'getRecommendationItems cost time:',time6-time5
         print 'total cost time:',time.time()-time1
 
-running_movies_demo(1)
+run_flag = 0
+running_movies_demo(run_flag=run_flag)
 
-def sim_tanimoto(critics, person1, person2): # exercies_1
+def sim_tanimoto(critics, person1, person2): # add exercise 1
     set_a = critics[person1]
     set_b = critics[person2]
     share_dic = {}
@@ -351,3 +353,16 @@ result = []
 print 'sim_tanimoto on critics',result
 print 'sim_tanimoto on movies',sim_tanimoto(prefs,'10','15')
 
+
+API_KEY = 'ef90c448f8f4a6cae53d39d57de91f74' # password add exercise 4
+API_SECRET ='72a2f98a3f405737382c9255ee54ffc1'
+username = '*******'
+password_hash = pylast.md5('****************')
+network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = username, password_hash = password_hash)
+
+artist = network.get_artist("System of a Down")
+print artist
+track = network.get_track("Iron Maiden", "The Nomad")
+print track
+track.love()
+track.add_tags(("awesome", "favorite"))
