@@ -356,8 +356,8 @@ print 'sim_tanimoto on movies',sim_tanimoto(prefs,'10','15')
 
 API_KEY = 'ef90c448f8f4a6cae53d39d57de91f74' # password add exercise 4
 API_SECRET ='72a2f98a3f405737382c9255ee54ffc1'
-username = '*******'
-password_hash = pylast.md5('****************')
+username = 'zpfbuaa'
+password_hash = pylast.md5('199602010253.zpf')
 network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = username, password_hash = password_hash)
 
 artist = network.get_artist("System of a Down")
@@ -366,3 +366,4 @@ track = network.get_track("Iron Maiden", "The Nomad")
 print track
 track.love()
 track.add_tags(("awesome", "favorite"))
+
