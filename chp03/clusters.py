@@ -68,7 +68,7 @@ def hcluster(rows, distance=pearson):
         clust.append(newcluster)
     return clust[0]
 
-def printclust(clust, labels = None,n=0,save_path = 'data/result.txt', save_flag = 1):
+def printclust(clust, labels = None,n=0,save_path = 'data/cluster_result.txt', save_flag = 1):
 
     fw = open(save_path,'a')
     for i in range(n):

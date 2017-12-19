@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8326afe6-cfc8-4bf9-a83e-b14465e15c03" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/chp03/generatefeedvector.py" afterPath="$PROJECT_DIR$/chp03/generatefeedvector.py" />
+      <change beforePath="$PROJECT_DIR$/chp03/clusters.py" afterPath="$PROJECT_DIR$/chp03/clusters.py" />
+      <change beforePath="$PROJECT_DIR$/chp03/data/result.txt" afterPath="$PROJECT_DIR$/chp03/data/result.txt" />
     </list>
     <ignored path="Collective_Intelligence.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,7 +20,7 @@
     <SUITE FILE_PATH="coverage/Collective_Intelligence$deliciousrec.coverage" NAME="deliciousrec Coverage Results" MODIFIED="1513422588655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chp02" />
     <SUITE FILE_PATH="coverage/Collective_Intelligence$generatefeedvector.coverage" NAME="generatefeedvector Coverage Results" MODIFIED="1513658333072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chp03" />
     <SUITE FILE_PATH="coverage/Collective_Intelligence$recommendations.coverage" NAME="recommendations Coverage Results" MODIFIED="1513527884404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chp02" />
-    <SUITE FILE_PATH="coverage/Collective_Intelligence$clusters.coverage" NAME="clusters Coverage Results" MODIFIED="1513651510726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chp03" />
+    <SUITE FILE_PATH="coverage/Collective_Intelligence$clusters.coverage" NAME="clusters Coverage Results" MODIFIED="1513659442093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chp03" />
     <SUITE FILE_PATH="coverage/Collective_Intelligence$test.coverage" NAME="test Coverage Results" MODIFIED="1513567296097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chp03" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -42,11 +43,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="clusters.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="clusters.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chp03/clusters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="73" column="22" lean-forward="true" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
+            <state relative-caret-position="356">
+              <caret line="70" column="58" lean-forward="false" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="result.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chp03/data/result.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="generatefeedvector.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="generatefeedvector.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chp03/generatefeedvector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="64" column="17" lean-forward="true" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+            <state relative-caret-position="795">
+              <caret line="53" column="28" lean-forward="true" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
               <folding>
                 <element signature="e#168#185#0" expanded="true" />
               </folding>
@@ -125,9 +136,9 @@
         <option value="$PROJECT_DIR$/chp03/Learning.md" />
         <option value="$PROJECT_DIR$/chp03/test.py" />
         <option value="$PROJECT_DIR$/chp02/recommendations.py" />
-        <option value="$PROJECT_DIR$/chp03/clusters.py" />
-        <option value="$PROJECT_DIR$/chp03/data/result.txt" />
         <option value="$PROJECT_DIR$/chp03/generatefeedvector.py" />
+        <option value="$PROJECT_DIR$/chp03/data/result.txt" />
+        <option value="$PROJECT_DIR$/chp03/clusters.py" />
       </list>
     </option>
   </component>
@@ -214,7 +225,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.generatefeedvector">
+  <component name="RunManager" selected="Python.clusters">
     <configuration name="clusters" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -526,8 +537,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.generatefeedvector" />
-        <item index="1" class="java.lang.String" itemvalue="Python.clusters" />
+        <item index="0" class="java.lang.String" itemvalue="Python.clusters" />
+        <item index="1" class="java.lang.String" itemvalue="Python.generatefeedvector" />
         <item index="2" class="java.lang.String" itemvalue="Python.test" />
         <item index="3" class="java.lang.String" itemvalue="Python.recommendations" />
         <item index="4" class="java.lang.String" itemvalue="Python.deliciousrec" />
@@ -856,14 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chp03/data/result.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Python/2.7/lib/python/site-packages/feedparser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -876,14 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="761">
           <caret line="58" column="31" lean-forward="true" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chp03/clusters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="73" column="22" lean-forward="true" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -906,11 +901,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chp03/generatefeedvector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="64" column="17" lean-forward="true" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+        <state relative-caret-position="795">
+          <caret line="53" column="28" lean-forward="true" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
           <folding>
             <element signature="e#168#185#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chp03/data/result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chp03/clusters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="70" column="58" lean-forward="false" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
