@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import math
 import csv
 import time
+import pylast
 # A dictionary of movie critics and their ratings of a small
 # set of movies
 critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
@@ -157,10 +158,39 @@ def topMatch(critics, person, n, similarity = sim_person):
 for person in x_person:
     print person+' top 3 are: ',topMatch(critics,person,3)
 
-def getRecommendation(critics,person,similarity = sim_person):
+def getSimarity(critics,person,top_n=5,similarity = sim_person):
+    other_dic = {}
+
+    for other in critics:
+        if other == person:
+            continue
+        sim = similarity(critics,person,other)
+        other_dic.setdefault(other,0)
+        other_dic[other] = sim
+
+    result = sorted(other_dic.iteritems(), key=lambda asd: asd[1],reverse=True)  # True from large to small, False: from small to large
+
+    return result[0:top_n]
+#
+# test = (getSimarity(critics,'Lisa Rose'))
+# for key in test:
+#     print key
+print 'getSimarity',getSimarity(critics,'Lisa Rose')
+# print type(critics)
+
+def getRecommendation(critics,person,similarity = sim_person,preCalSim = getSimarity,top_n=5,accelerator_flag = 0):
     totals = {}
     simSums = {}
-    for other in critics:
+    other_list = []
+    pre_other = []
+    if accelerator_flag==1:
+        pre_other = preCalSim(critics,person,top_n)
+        for i in range(top_n):
+            other_list.append(pre_other[i][0])
+    else:
+        other_list = [item for item in critics]
+    print 'other_list:',other_list
+    for other in other_list:
         if other == person:
             continue
         sim = similarity(critics,person,other)
@@ -264,7 +294,7 @@ def load_data(root_path,movies_path = 'movies.csv',rating_path='ratings.csv'):
         header = True
         number = 0
         for item_pref in prefs_data: #(userId,movieId,rating,timestamp)
-            if number > 3000: # the running_result_pic: this value is the total line in ratings.csv 100005
+            if number > 10000: # the running_result_pic: this value is the total line in ratings.csv 100005
                 break
             userId = item_pref[0]
             movieId = item_pref[1]
@@ -282,7 +312,7 @@ print prefs['15']
 def running_movies_demo(run_flag=0):
     if(run_flag==1):
         time1 = time.time()
-        recommend1 =  getRecommendation(prefs,'15')[0:50] # this cost time much than others
+        recommend1 =  getRecommendation(prefs,'15',accelerator_flag=1)[0:50] # this cost time much than others
         print 'recommend1 are:',recommend1
         time2 = time.time()
         print 'getRecommendation cost time:',time2-time1
@@ -300,8 +330,10 @@ def running_movies_demo(run_flag=0):
         print 'getRecommendationItems cost time:',time6-time5
         print 'total cost time:',time.time()-time1
 
+run_flag = 0
+running_movies_demo(run_flag=run_flag)
 
-def sim_tanimoto(critics, person1, person2): # exercies_1
+def sim_tanimoto(critics, person1, person2): # add exercise 1
     set_a = critics[person1]
     set_b = critics[person2]
     share_dic = {}
@@ -320,4 +352,18 @@ result = []
 [result.append(sim_tanimoto(critics,x_person[i],x_person[j]))for i in range(len(x_person)) for j in range(i+1,len(x_person))]
 print 'sim_tanimoto on critics',result
 print 'sim_tanimoto on movies',sim_tanimoto(prefs,'10','15')
+
+
+API_KEY = 'ef90c448f8f4a6cae53d39d57de91f74' # password add exercise 4
+API_SECRET ='72a2f98a3f405737382c9255ee54ffc1'
+username = 'zpfbuaa'
+password_hash = pylast.md5('199602010253.zpf')
+network = pylast.LastFMNetwork(api_key = API_KEY, api_secret = API_SECRET, username = username, password_hash = password_hash)
+
+artist = network.get_artist("System of a Down")
+print artist
+track = network.get_track("Iron Maiden", "The Nomad")
+print track
+track.love()
+track.add_tags(("awesome", "favorite"))
 
